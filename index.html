@@ -1,261 +1,279 @@
-﻿<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<meta charset="utf-8">
-<title>Canvas游动的蛇虫动画特效 - 站长素材</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-1.12.4.js"></script>
+    <style>
+        
+       body{
+           perspective: 800px;
+           position: relative;
+           overflow: hidden;
+           background-image:url(./img/1529918493873.jpg);
+       }
+       .btn{
+           position: absolute;
+           top:20px;
+           right: 100px;
+           width: 100px;
+           height: 50px;
+           font-size: 28px;
+           font-family: kaiti;
+           background-color: rgb(255, 221, 211);
+           color:gold;
+           border:none;
+           outline: none;
+       }
+       .box{
+            position: relative;
+            top: 100px;
+            left: 42%;
+            list-style: none;
+            width: 180px;
+            height: 318.6px;
+            
+           transform-style: preserve-3d;
+            box-sizing: border-box;
+           
+            animation: move 8s linear infinite;
+           
+           
+        }
+        .box .bb{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left:0;
+            top: 0;         
+             box-sizing: border-box;
+            box-shadow: 0px 0px 30px gold; 
+            transform-style: preserve-3d;        
+            
+        }
+        .wall .hh {
+            width: 100%;
+            height: 100%;
+            border: 1px solid gold;
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #568567;
+            transform-style: preserve-3d;
+           
+        }
+        .wall i {
+            width: 50%;
+            height: 50%;
+            border: 1px solid gold;
+            box-sizing: border-box;
+            position: absolute;
+            top: 65px;
+            left: 65px;
+            background-color: #568567;
+            transform-style: preserve-3d;
+           
+        }
+        .wall {
+            width: 260px;
+            height: 260px;
+            position: relative;
+            top: 150px;
+            left: 43.2%;
+            animation: run infinite linear 10s;
+            transform-style: preserve-3d;
+        }
+        .wall:hover .box1 {
+            transform: translateY(-260px) rotateX(-90deg);
+        }
 
-<style>
-html,
-body {
-	height: 100%; 
-        overflow: hidden; 
-}
+        .wall:hover .box2 {
+            transform: translateY(260px) rotateX(90deg);
+        }
 
-body {
-  background: radial-gradient(#222, #000);
-}
+        .wall:hover .box3 {
+            transform: translateX(-260px) rotateY(-90deg);
+        }
 
-canvas {
-	display: block;
-}
-</style>
+        .wall:hover .box4 {
+            transform: translateX(260px) rotateY(90deg);
+        }
 
+        .wall:hover .box5 {
+            transform: translateZ(260px);
+        }
+
+        .wall:hover .box6 {
+            transform: translateZ(-260px);
+        }
+
+        @keyframes run {
+            100% {
+                transform: rotateX(720deg) rotateY(1080deg) ;
+            }
+        }
+        @keyframes move{
+            
+            100%{
+                  transform: rotateY(360deg);   
+                 }
+             }
+
+        .box1 {
+            transform: translateY(-130px) rotateX(-90deg);
+            background: url('./img/07.jpg') left top/260px 260px no-repeat;
+        }
+
+        .box2 {
+            transform: translateY(130px) rotateX(90deg);
+            background: url('./img/08.jpg') left top/260px 260px no-repeat;
+        }
+
+        .box3 {
+            transform: translateX(-130px) rotateY(-90deg);
+            background: url('./img/09.jpg') left top/260px 260px no-repeat;
+        }
+
+        .box4 {
+            transform: translateX(130px) rotateY(90deg);
+            background: url('./img/10.jpg') left top/260px 260px no-repeat;
+        }
+
+        .box5 {
+            transform: translateZ(130px);
+            background: url('./img/11.jpg') left top/260px 260px no-repeat;
+        }
+
+        .box6 {
+            transform: translateZ(-130px);
+            background: url('./img/12.jpg') left top/260px 260px no-repeat;
+        }
+        .i1 {
+            transform: translateY(-65px) rotateX(-90deg);
+            background: url('./img/10.jpg') left top/130px 130px no-repeat;
+        }
+
+        .i2 {
+            transform: translateY(65px) rotateX(90deg);
+            background: url('./img/11.jpg') left top/130px 130px no-repeat;
+        }
+
+        .i3 {
+            transform: translateX(-65px) rotateY(-90deg);
+            background: url('./img/12.jpg') left top/130px 130px no-repeat;
+        }
+
+        .i4 {
+            transform: translateX(65px) rotateY(90deg);           
+            background: url('./img/07.jpg') left top/130px 130px no-repeat;
+        }
+
+        .i5 {
+            transform: translateZ(65px);         
+            background: url('./img/08.jpg') left top/130px 130px no-repeat;
+        }
+
+        .i6 {
+            transform: translateZ(-65px);          
+            background: url('./img/09.jpg') left top/130px 130px no-repeat;
+        }
+        .div1 {
+            transform: rotateY(60deg) translateZ(250px);
+            background: url('./img/01.jpg') left top/180px 318.6px no-repeat;
+        }
+
+         .div2 {
+            transform: rotateY(120deg) translateZ(250px);
+            background: url('./img/02.jpg') left top/180px 318.6px no-repeat;
+         }  
+
+       .div3 {
+            transform: rotateY(180deg) translateZ(250px);
+            background: url('./img/03.jpg') left top/180px 318.6px no-repeat;
+        }
+
+        .div4 {
+            transform: rotateY(240deg) translateZ(250px);
+            background: url('./img/04.jpg') left top/180px 318.6px no-repeat;
+            }
+
+        .div5 {
+            transform: rotateY(300deg) translateZ(250px);
+            background: url('./img/05.jpg') left top/180px 318.6px no-repeat;
+             }
+
+        .div6 {
+            transform:  translateZ(250px);
+            background: url('./img/06.jpg') left top/180px 318.6px no-repeat;
+             } 
+        .bigPic {
+            position: absolute;
+            top: 10px;
+            left: 26px;
+            z-index: 10;  
+        }
+        .xiangkuang{
+            position: absolute;
+            top: -28px;
+            left: -20px;
+            display: none;
+            width: 600px;
+            height: 985px;
+            z-index: 666;
+        }
+    </style>
 </head>
-<body>
+<body>   
+        <div class="bg wall ">
+            <i class="i1"></i>
+            <i class="i2"></i>
+            <i class="i3"></i>
+            <i class="i4"></i>
+            <i class="i5"></i>
+            <i class="i6"></i>
+            <div class="box1  hh "></div>
+            <div class="box2  hh "></div>
+            <div class="box3  hh "></div>
+            <div class="box4  hh "></div>
+            <div class="box5  hh "></div>
+            <div class="box6  hh "></div>
+        </div>
+        <img src="" class="bigPic" alt="">
+        <button class="btn">切换</button>
+        <img class="xiangkuang" src="./img/bg1.png" alt="">
 
-<canvas id="c"></canvas>
-
-<script>
-/* click to the atrract the snake bugs */
-
-var a = document.getElementById( 'c' ),
-	c = a.getContext( '2d' );
-
-var chains = [],
-	chainCount = 30,
-	entityCount = 10,
-	w = a.width,
-	h = a.height,
-	cx = w / 2,
-	cy = h / 2,
-	mx = cx,
-	my = cy,
-	md = 0,
-	tick = 0,
-	maxa = 2,
-	maxv = 1,
-	avoidTick = 20,
-	avoidThresh = 50,
-	TWO_PI = Math.PI * 2;
-
-function rand( min, max ) {
-	return Math.random() * ( max - min ) + min;
-}
-
-function Impulse() {
-	this.x = cx;
-	this.y = cy;
-	this.ax = 0;
-	this.ay = 0;
-	this.vx = 0;
-	this.vy = 0;
-	this.r = 1;
-}
-
-Impulse.prototype.step = function() {
-	this.x += this.vx;
-	this.y += this.vy;
-	if( this.x + this.r >= w || this.x <= this.r ) { this.vx = 0; this.ax = 0; }
-	if( this.y + this.r >= h || this.y <= this.r ) { this.vy = 0; this.ay = 0; }
-	if( this.x + this.r >= w ) { this.x = w - this.r; }
-	if( this.x <= this.r ) { this.x = this.r; }
-	if( this.y + this.r >= h ) { this.y = h - this.r; }
-	if( this.y <= this.r ) { this.y = this.r; }
-
-	if( md ) {
-		this.vx += ( mx - this.x ) * 0.03;
-		this.vy += ( my - this.y ) * 0.03;
-	}
-	
-	this.ax += rand( -0.4, 0.4 );
-	this.ay += rand( -0.4, 0.4 );
-	this.vx += this.ax;
-	this.vy += this.ay;
-	this.ax *= Math.abs( this.ax ) > maxa ? 0.75 : 1;
-	this.ay *= Math.abs( this.ay ) > maxa ? 0.75 : 1;
-	this.vx *= Math.abs( this.vx ) > maxv ? 0.75 : 1;
-	this.vy *= Math.abs( this.vy ) > maxv ? 0.75 : 1;
-};
-
-function Chain() {
-	this.branches = [];
-	this.impulse = new Impulse();
-	this.branches.push( new Branch({
-		chain: this,
-		attractor: this.impulse
-	}));
-}
-
-Chain.prototype.step = function() {
-	this.impulse.step();
-	this.branches.forEach( function( branch, i ) {
-		branch.step();
-	});
-
-	this.branches.forEach( function( branch, i ) {
-		branch.draw();
-	});
-};
-
-function Branch( opt ) {
-	this.entities = [];
-	this.chain = opt.chain;
-	this.avoiding = 0;
-	var entity;
-	for( var i = 0; i < entityCount; i++ ) {
-		entity = new Entity({
-			branch: this,
-			i: i,
-			x: cx,
-			y: cy,
-			radius: 1 + ( entityCount - i ) / entityCount * 5,
-			damp: 0.2,
-			attractor: i === 0 ? opt.attractor : this.entities[ i - 1 ]
-		});
-		this.entities.push( entity );
-	}
-}
-
-Branch.prototype.step = function() {
-	var i = chains.length;
-	while( i-- ) {
-		var impulse = this.chain.impulse,
-			oImpulse = chains[ i ].impulse,
-			dx = oImpulse.x - impulse.x,
-			dy = oImpulse.y - impulse.y,
-			dist = Math.sqrt( dx * dx + dy * dy );
-		if( !md && impulse !== oImpulse && dist < avoidThresh ) {
-			impulse.ax = 0;
-			impulse.ay = 0;
-			impulse.vx -= dx * 0.1;
-			impulse.vy -= dy * 0.1;
-			this.avoiding = avoidTick;
-		}
-	}
-
-	this.entities.forEach( function( entity, i ) {
-		entity.step();
-	});
-
-	if( this.avoiding > 0 ) {
-		this.avoiding--;
-	}
-};
-
-Branch.prototype.draw = function() {
-	var self = this;
-	c.beginPath();
-	c.moveTo( this.entities[ 0 ].x, this.entities[ 0 ].y );
-	this.entities.forEach( function( entity, i ) {
-		if( i > 0 ) {
-			c.lineTo( entity.x, entity.y );
-		}
-	});
-	c.strokeStyle = 'hsla(' + ( md ? 120 : ( self.avoiding ? 0 : 200 ) ) + ', 70%, 60%, 0.3)';
-	c.stroke();
-
-	this.entities.forEach( function( entity, i ) {
-		c.save();
-		c.translate( entity.x, entity.y );
-		c.beginPath();
-		c.rotate( entity.rot );
-		if( entity.i === 0 ) {
-			c.fillStyle = ( md ? '#6c6' : ( self.avoiding ? '#c66' : '#6bf' ) );
-		} else {
-			c.fillStyle = 'hsla(' + ( md ? 120 : ( self.avoiding ? 0 : 200 ) ) + ', 70%, ' + Math.min( 50, ( 5 + ( ( entity.av / maxv ) * 20 ) ) ) + '%, ' + ( ( ( entityCount - i ) / entityCount ) ) + ')';
-		}
-		c.fillRect( -entity.radius, -entity.radius, entity.radius * 2, entity.radius * 2 );
-		c.restore();
-	});
-
-};
-
-function Entity( opt ) {
-	this.branch = opt.branch;
-	this.i = opt.i;
-	this.x = opt.x;
-	this.y = opt.y;
-	this.vx = 0;
-	this.vy = 0;
-	this.radius = opt.radius;
-	this.attractor = opt.attractor;
-	this.damp = opt.damp;
-}
-
-Entity.prototype.step = function() {
-	this.vx = ( this.attractor.x - this.x ) * this.damp;
-	this.vy = ( this.attractor.y - this.y ) * this.damp;
-	this.x += this.vx;
-	this.y += this.vy;
-	this.av = ( Math.abs( this.vx ) + Math.abs( this.vy ) ) / 2;
-
-	var dx = this.attractor.x - this.x,
-		dy = this.attractor.y - this.y;
-	this.rot = Math.atan2( dy, dx );
-};
-
-function loop() {
-	requestAnimationFrame( loop );
-
-	c.globalCompositeOperation = 'destination-out';
-	c.fillStyle = 'rgba(0, 0, 0, 1)';
-	c.fillRect( 0, 0, a.width, a.height );
-	c.globalCompositeOperation = 'lighter';
-
-	chains.forEach( function( chain, i ) {
-		chain.step();
-	});
-
-	tick++;
-}
-
-function resize() {
-	a.width = window.innerWidth;
-	a.height = window.innerHeight;
-	w = a.width;
-	h = a.height;
-	cx = w / 2;
-	cy = h / 2;
-}
-
-window.addEventListener( 'resize', resize );
-
-window.addEventListener( 'mousedown', function() {
-	md = 1;
-});
-
-window.addEventListener( 'mouseup', function() {
-	md = 0;
-});
-
-window.addEventListener( 'mousemove', function( e ) {
-	mx = e.clientX;
-	my = e.clientY;
-});
-
-resize();
-
-for( var i = 0; i < chainCount; i++ ) {
-	chains.push( new Chain() );
-}
-
-loop();
-reset();
-</script>
-
-<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
-<p>适用浏览器：360、FireFox、Chrome、Opera、傲游、搜狗、世界之窗. 不支持Safari、IE8及以下浏览器。</p>
-<p>来源：<a href="http://sc.chinaz.com/" target="_blank">站长素材</a></p>
-</div>
 </body>
+
 </html>
+<script>
+    $(function(){
+        $('.wall div').click(function () {
+            $('.xiangkuang').show();
+            if($('.bg div').hasClass('hh')){
+                var num=$(this).css('background-image').slice(-8,-6)-6;
+                $('.bigPic').attr('src',"./img/0"+num+".jpg");
+            }else{
+                $('.bigPic').attr('src', $(this).css("background-image").split('///')[1].slice(0,-2));
+            }
+            console.log($(this).css('background-image'));
+            $('.bigPic').css({
+                "border":"1px solid gold",
+                "box-shadow":"0px 0px 50px gold",
+                "width": 506,
+                "height": 888
+            })
+        })
+        $('.btn').click(function(){
+            $('.bg').toggleClass('wall box');
+            $('.bg div').toggleClass('hh bb');
+            for(var i=1;i<=6;i++){
+                $('.bg div').eq(i-1).toggleClass('box'+i);
+                $('.bg div').eq(i-1).toggleClass('div'+i);          
+            }
+        })
+    })  
+</script>
